@@ -1,0 +1,48 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    
+    encoders:
+        App\Sgr\V1\ReciboBundle\Entity\User: { algorithm: sha512, encode_as_base64: false, iterations: 64000 }
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        chain_provider:
+            chain:
+                providers: [user_db, in_memory]
+        in_memory:
+            memory:
+                users:
+                    adm@adm: { password: adm, roles: [ 'ROLE_ADMIN' ] }
+        user_db:
+            entity: { class: App\Sgr\V1\ReciboBundle\Entity\User, property: username }
+            
+    firewalls:
+#         disables authentication for assets and the profiler, adapt it according to your needs
+        libera_login:
+            stateless:  true
+            pattern: ^/v1/login
+            security: false
+            
+        libera_utilitarios:
+            stateless:  true
+            pattern: ^/v1/utilitarios/*
+            security: false
+
+        libera_options:
+            stateless:  true
+            pattern: ^/v1/
+            methods: OPTIONS
+            anonymous: true
+
+        
+        main:
+            stateless:  true
+#            anonymous: ~
+#            logout: ~
+            
+            provider: user_db
+            guard:
+                authenticators:
+                    - app.token_authenticator

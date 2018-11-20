@@ -1,0 +1,25 @@
+
+###> symfony/framework-bundle ###
+backend/.env
+backend/public/bundles/
+backend/var/
+backend/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+backend/.web-server-pid
+###< symfony/web-server-bundle ###
+
+## Front End
+frontend/.DS_Store
+frontend/node_modules/
+frontend/dist/
+frontend/npm-debug.log
+frontend/yarn-error.log
+
+# Editor directories and files
+frontend/.idea
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln

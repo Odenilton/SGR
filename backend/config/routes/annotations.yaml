@@ -1,0 +1,15 @@
+app:
+  resource: "@AppBundle/Controller/"
+  type:     annotation
+
+base:
+  resource: "@BaseBundle/Controller/"
+  type:     annotation
+
+seguranca:
+  resource: "@SegurancaBundle/Controller/"
+  type:     annotation
+
+recibo:
+  resource: "@ReciboBundle/Controller/"
+  type:     annotation

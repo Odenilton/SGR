@@ -1,0 +1,100 @@
+{# templates/blog/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        * {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        }
+       .logo {
+            width:450px;
+            height: 200px;
+        }
+        .title {
+            font-size: 20pt;
+        }
+        .right {
+            text-align: right !important;
+        }
+        .center {
+            text-align: center !important;
+        }
+        .valores {
+            text-align: right;
+            padding-bottom: -1px;
+        }
+        .textoRecibo {
+            font-size: 16pt;
+            text-align: justify;
+        }
+        .assinatura {
+            font-size: 16pt;
+            text-align: center;
+            margin: 0 auto;
+            width: 450px;
+        }
+        .formaPgto{
+            width: 250px;
+            margin-top: 50px;
+            float: right;
+            border: 1px solid;
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <center>Sua Logo Aqui</center>
+
+    <br /><br />
+
+    <h1 class="title center">RECIBO</h1>
+
+    <br />
+
+    <div class="valor">
+        <h3 class="valores">BRUTO: R$ {{ recibo.getRendimentoTributavel()|number_format(2, ',', '.') }}</h3>
+        <h3 class="valores">INSS: R$ {{ recibo.getPrevidenciaOficial()|number_format(2, ',', '.') }}</h3>
+        <h3 class="valores">ISS: R$ {{ recibo.getImpostoISS()|number_format(2, ',', '.') }}</h3>
+        <h3 class="valores">IR: R$ {{ recibo.getImpostoIRRF()|number_format(2, ',', '.') }}</h3>
+        <b><h2 class="valores">LIQUIDO: R$ {{ recibo.getValorLiquido()|number_format(2, ',', '.') }}</h2></b>
+    </div>
+
+    <br /><br />
+
+    <p class="textoRecibo">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recebi {{ recibo.getLigacaoOrgao() }} <b>{{ recibo.getOrgao().getNome() }}</b>, a importancia de  <b>R$ {{ recibo.getRendimentoTributavel()|number_format(2, ',', '.') }} ({{ valorBrutoExtenso }})</b> proveniente do pagamento da prestação de serviço de {{ recibo.getDescricaoServico() }}.
+    </p class="textoRecibo">
+    
+    <p class="textoRecibo">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Por ser este a expressão da verdade vai devidamente datado e assinado para que surta os efeitos de direito.
+    </p class="textoRecibo">
+
+    <p class="textoRecibo">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cachoeira de Goiás, {{ recibo.getDia() }}/{{ recibo.getMes() }}/{{ recibo.getAno() }}
+    </p>
+    
+    <br /><br /><br />
+
+    <p class="assinatura">
+        {{recibo.getPessoa().getNome()}}<br />
+        CPF: {{ recibo.getPessoa().getCPF() }}
+
+    </p>
+
+    <div class="formaPgto">
+        <h4 class="center">FORMA DE PAGAMENTO: {{ formaPgto }}<br /></h4>
+        
+
+        {% if formaPgto == 'TRANSFERENCIA BANCARIA' %}
+            BANCO: {{ banco }}<br />
+            AGENCIA: {{ recibo.getPessoa().getAgencia() }} - {{recibo.getPessoa().getDigitoAgencia() }}<br />
+            {% if operacao != null %}
+            OPERACAO: {{ operacao }}<br />
+            {% endif %}
+            CONTA CORRENTE: {{ recibo.getPessoa().getConta() }} - {{recibo.getPessoa().getDigitoConta() }}<br />
+        {% endif %}
+    </div>
+{% endblock %}
