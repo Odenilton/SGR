@@ -4,7 +4,7 @@ Sistema Gerador de Recibo
 
 Link para acesso ao sistema online para testes.
 
-suaempresa.oemsistemas.com.br
+https://suaempresa.oemsistemas.com.br
 
 Ano e Mês a escolha
 Orgão = Sua Empresa
