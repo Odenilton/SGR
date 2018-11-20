@@ -6,7 +6,7 @@ Link para acesso ao sistema online para testes.
 
 https://suaempresa.oemsistemas.com.br
 
-Ano e Mês a escolha
+Ano e Mês = 2018 - Agosto
 Orgão = Sua Empresa
 
 usuario = odenilton@administrador
